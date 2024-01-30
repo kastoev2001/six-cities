@@ -4,3 +4,8 @@ export const HousingType = {
     Room: 'room',
     Hotel: 'hotel',
 } as const;
+
+export const UserType = {
+    Normal: 'обычный',
+    Pro: 'pro',
+} as const;
