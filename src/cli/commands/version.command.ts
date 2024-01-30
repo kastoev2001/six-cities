@@ -4,6 +4,8 @@ import { resolve } from 'node:path';
 import { Command } from './command.const.js';
 import { ICommand } from './command.interface.js';
 
+import chalk from 'chalk';
+
 type PackageJsonConfig = {
     version: string;
 }
@@ -30,7 +32,7 @@ export class VersionCommand implements ICommand {
     public execute = async (..._parameters: string[]): Promise<void> => {
         try {
             const version = this.readVersion();
-            console.info(version);
+            console.info(chalk.green(version));
         } catch (err: unknown) {
             console.error(`Failed to read version from ${this.filePath}`);
 

@@ -1,6 +1,8 @@
 import { Command } from './command.const.js';
 import { ICommand } from './command.interface.js';
 
+import chalk from 'chalk';
+
 export class HelpCommand implements ICommand {
     public getName = () => {
         return Command.Help;
@@ -14,10 +16,10 @@ export class HelpCommand implements ICommand {
         
         Команды:
         
-         --version:                   # выводит номер версии
-         --help:                      # печатает этот текст
-         --import <path>:             # импортирует данные из TSV
-         --generate <n> <path> <url>  # генерирует произвольное количество тестовых данных
+         ${chalk.underline('--version:')}                   # выводит номер версии
+         ${chalk.underline('--help:')}                      # печатает этот текст
+         ${chalk.underline('--import <path>:')}             # импортирует данные из TSV
+         ${chalk.underline('--generate <n> <path> <url>')}  # генерирует произвольное количество тестовых данных
         `);
     }
 }
