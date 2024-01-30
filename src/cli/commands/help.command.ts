@@ -4,12 +4,10 @@ import { ICommand } from './command.interface.js';
 import chalk from 'chalk';
 
 export class HelpCommand implements ICommand {
-    public getName = () => {
-        return Command.Help;
-    }
+  public getName = () => Command.Help;
 
-    public execute = async (..._paramenters: string[]): Promise<void> => {
-        console.info(`
+  public execute = async (..._paramenters: string[]): Promise<void> => {
+    console.info(`
         Программа для подготовки данных для REST API сервера.  
 
         Пример: cli.js --<command> [--arguments]
@@ -21,5 +19,5 @@ export class HelpCommand implements ICommand {
          ${chalk.underline('--import <path>:')}             # импортирует данные из TSV
          ${chalk.underline('--generate <n> <path> <url>')}  # генерирует произвольное количество тестовых данных
         `);
-    }
+  };
 }
