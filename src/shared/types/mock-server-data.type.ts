@@ -6,6 +6,6 @@ export type mockServerData = {
   avatars: string[];
   images: string[];
   coordinates: string[][];
-  usersName: string[];
+  usernames: string[];
   email: string[];
 };
