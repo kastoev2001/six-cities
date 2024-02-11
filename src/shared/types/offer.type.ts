@@ -1,5 +1,6 @@
 import { HousingType, UserType } from './housing-type.const.js';
-import { OfferImages } from './offer-images.type.js';
+
+type OfferImages = string[];
 
 type User = {
   username: string;
@@ -25,6 +26,5 @@ export type Offer = {
   facilities: string[];
   commentsCount: number;
   coordinates: string[];
-  user: User
-
+  user: User;
 }
