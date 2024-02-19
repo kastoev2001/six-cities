@@ -1,1 +1,1 @@
-export const logFilePath = '/logs/rest.log';
+export const logFilePath = 'logs/rest.log';
