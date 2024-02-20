@@ -14,6 +14,6 @@ export class RestApplication {
 
   public init = () => {
     this.logger.info('Application initialization.');
-    this.logger.info(`Get value from env $PORT: ${this.config.get('PORT')}`)
-  }
+    this.logger.info(`Get value from env $PORT: ${this.config.get('PORT')}`);
+  };
 }
