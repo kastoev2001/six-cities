@@ -7,7 +7,7 @@ export type RestSchema = {
   DB_HOST: string;
   DB_NAME: string;
   DB_USER: string;
-  DB_PASSWROD: string;
+  DB_PASSWORD: string;
   DB_PORT: string;
 }
 
@@ -38,10 +38,10 @@ export const configRestSchama = convict<RestSchema>({
     env: 'DB_USER',
     default: null,
   },
-  DB_PASSWROD: {
+  DB_PASSWORD: {
     doc: '',
     format: String,
-    env: 'DB_PASSWROD',
+    env: 'DB_PASSWORD',
     default: null,
   },
   DB_NAME: {
@@ -53,6 +53,7 @@ export const configRestSchama = convict<RestSchema>({
   DB_PORT: {
     doc: '',
     format: 'port',
+    env: 'DB_PORT',
     default: '27017',
   }
 });
