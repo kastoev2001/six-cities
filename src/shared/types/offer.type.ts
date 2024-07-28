@@ -1,13 +1,7 @@
-import { HousingType, UserType } from './housing-type.const.js';
+import { HousingType } from './housing-type.const.js';
+import { User } from './user.type.js';
 
 type OfferImages = string[];
-
-type User = {
-  username: string;
-  email: string;
-  avatar: string;
-  type: typeof UserType[keyof typeof UserType]
-}
 
 export type Offer = {
   title: string;
