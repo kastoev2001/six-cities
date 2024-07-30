@@ -1,6 +1,7 @@
 import {defaultClasses, prop, getModelForClass, modelOptions } from '@typegoose/typegoose';
 import { User, UserValueType } from '../../types/index.js';
 import { UserType } from '../../types/index.js';
+import { createHMAC256 } from '../../helpers/hash.js';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export interface UserEntity extends defaultClasses.Base {}
@@ -53,6 +54,10 @@ export class UserEntity extends defaultClasses.TimeStamps implements User  {
 
   public getPassword = (): string => {
     return this.password;
+  }
+
+  public setPassword = (password: string, salt: string): void => {
+    this.password = createHMAC256(password, salt);
   }
 }
 
