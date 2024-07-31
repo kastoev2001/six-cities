@@ -50,9 +50,9 @@ export class UserEntity extends defaultClasses.TimeStamps implements User  {
     require: true,
     default: '',
   })
-  private password!: string;
+  private password?: string;
 
-  public getPassword = (): string => {
+  public getPassword = () => {
     return this.password;
   }
 
