@@ -4,4 +4,5 @@ export const Component = {
   RestConfig: Symbol.for('RestConfig'),
   DatabaseClient: Symbol.for('DatabaseClient'),
   UserModel: Symbol.for('UserModel'),
+  UserService: Symbol.for('UserService'),
 };
