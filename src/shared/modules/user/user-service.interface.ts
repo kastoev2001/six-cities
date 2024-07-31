@@ -4,7 +4,7 @@ import { CreateUserDto } from './dto/create-user.dto.js';
 
 export interface UserService {
   create(dto: CreateUserDto, salt: string): Promise<DocumentType<UserEntity>>;
-  findByEmail(email: string): Promise<DocumentType<UserEntity>> | null;
+  findByEmail(email: string): Promise<DocumentType<UserEntity> | null>;
 
-  createOrFindbyEmail(dto: string, salt: string): Promise<DocumentType<UserEntity>>;
+  createOrFindbyEmail(dto: CreateUserDto, salt: string): Promise<DocumentType<UserEntity>>;
 }
