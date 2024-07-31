@@ -1,6 +1,6 @@
 import { UserValueType } from '../../../types/index.js';
 
-export class CreateUserDto {
+export class CreateUserDTO {
   email!: string;
   username!: string;
   avatar!: string;
