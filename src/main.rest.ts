@@ -4,11 +4,13 @@ import { Component } from './shared/types/index.js';
 import { RestApplication } from './rest/index.js';
 import { createRestApplicationContainer } from './rest/index.js'
 import { createUserContainer } from './shared/modules/user/index.js';
+import { createOfferContainer } from './shared/modules/offer/inde.js';
 
 async function bootstrap() {
   const container = Container.merge(
     createRestApplicationContainer(),
     createUserContainer(),
+    createOfferContainer(),
   );
 
 
