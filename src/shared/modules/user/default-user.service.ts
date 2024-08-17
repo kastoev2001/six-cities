@@ -40,10 +40,6 @@ export class DefaultUserService implements UserService {
       return findedUser;
     }
 
-    const user = new UserEntity(dto);
-
-    user.setPassword(dto.password, salt);
-
-    return await this.userModel.create(user);
+    return await this.create(dto, salt);
   }
 }
