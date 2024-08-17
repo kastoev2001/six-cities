@@ -45,6 +45,7 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   previewImage!: string;
 
   @prop({
+    type: () => String,
     required: true,
     default: [],
   })
@@ -89,6 +90,7 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   price!: number;
 
   @prop({
+    type: () => String,
     required: true,
     default: '',
   })
@@ -101,6 +103,7 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   commentsCount!: number;
 
   @prop({
+    type: () => String,
     required: true,
     default: '',
   })
