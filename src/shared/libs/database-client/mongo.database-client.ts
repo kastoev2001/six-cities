@@ -21,7 +21,7 @@ export class MongoseDatabaseClient implements DatabaseClient {
   }
 
   public connect = async (uri: string): Promise<void> => {
-    if (this.isConntectedToDatabase()) {
+    if (this.isConnectedToDatabase()) {
       throw new Error('MongoDB client already connected');
     }
 
@@ -31,6 +31,7 @@ export class MongoseDatabaseClient implements DatabaseClient {
     while (attempt < RETRY_COUNT) {
       try {
         this.mongoose = await Mongoose.connect(uri);
+        this.isConnected = true;
         this.logger.info('Database connected established.')
         return;
       } catch (err) {
@@ -43,14 +44,14 @@ export class MongoseDatabaseClient implements DatabaseClient {
 
     throw new Error(`Unable to establish to connection after ${RETRY_COUNT}`)
   }
-
-  public isConntectedToDatabase = (): boolean => {
+         
+  public isConnectedToDatabase = (): boolean => {
     return this.isConnected;
   }
 
-  public disconnect = async (): Promise<void> => {
-    if (!this.isConntectedToDatabase()) {
-      throw new Error('Not conntected to the database.');
+  public async disconnect(): Promise<void> {
+    if (!this.isConnectedToDatabase()) {
+      throw new Error('Not connected to the database');
     }
 
     await this.mongoose.disconnect?.();
