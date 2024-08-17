@@ -17,5 +17,5 @@ export class CreateOfferDTO {
   facilities!: string[];
   commentsCount!: number;
   coordinates!: string[];
-  user!: string;
+  userId!: string;
 }
