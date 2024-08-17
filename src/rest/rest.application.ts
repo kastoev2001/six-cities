@@ -26,7 +26,7 @@ export class RestApplication {
     );
 
     return this.databaseClient.connect(uri);
-  }
+  };
 
   public init = async (): Promise<void> => {
     this.logger.info('Application initialization.');
