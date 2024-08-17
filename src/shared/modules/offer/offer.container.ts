@@ -8,4 +8,4 @@ export const createOfferContainer = () => {
   userContainer.bind<ModelType<OfferEntity>>(Component.OfferModel).toConstantValue(OfferModel);
 
   return userContainer;
-}
+};

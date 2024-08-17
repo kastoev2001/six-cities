@@ -3,7 +3,7 @@ import { Component } from '../shared/types/index.js';
 import { PinoLogger, Logger } from '../shared/libs/logger/index.js';
 import { RestApplication } from './rest.application.js';
 import { Config, RestSchema, RestConfig } from '../shared/config/index.js';
-import  { DatabaseClient, MongoseDatabaseClient } from '../shared/libs/database-client/index.js';
+import { DatabaseClient, MongoseDatabaseClient } from '../shared/libs/database-client/index.js';
 
 export const createRestApplicationContainer = () => {
   const restApplicationContainer = new Container();

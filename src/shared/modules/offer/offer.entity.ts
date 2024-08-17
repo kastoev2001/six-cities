@@ -1,9 +1,9 @@
 import { defaultClasses, prop, modelOptions, getModelForClass, Ref } from '@typegoose/typegoose';
-import { Offer, OfferImages, OfferValueType, HousingType } from '../../types/index.js';
+import { OfferImages, OfferValueType, HousingType } from '../../types/index.js';
 import { UserEntity } from '../user/user.entity.js';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
-export interface OfferEntity extends defaultClasses.Base {}
+export interface OfferEntity extends defaultClasses.Base { }
 
 @modelOptions({
   schemaOptions: {
@@ -13,107 +13,107 @@ export interface OfferEntity extends defaultClasses.Base {}
 })
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export class OfferEntity extends defaultClasses.TimeStamps {
-  
-  @prop({
-    required: true,
-    default: '',
-  })
-  public title!: string;
 
   @prop({
     required: true,
     default: '',
   })
-  description!: string;
+    title!: string;
 
   @prop({
     required: true,
     default: '',
   })
-  postDate!: Date;
+    description!: string;
 
   @prop({
     required: true,
     default: '',
   })
-  city!: string;
+    postDate!: Date;
 
   @prop({
     required: true,
     default: '',
   })
-  previewImage!: string;
+    city!: string;
+
+  @prop({
+    required: true,
+    default: '',
+  })
+    previewImage!: string;
 
   @prop({
     type: () => String,
     required: true,
     default: [],
   })
-  offerImages!: OfferImages;
+    offerImages!: OfferImages;
 
   @prop({
     required: true,
   })
-  isPremium!: boolean;
+    isPremium!: boolean;
 
   @prop({
     required: true,
   })
-  isFavorite!: boolean;
+    isFavorite!: boolean;
 
   @prop({
     required: true,
   })
-  rating!: number;
+    rating!: number;
 
   @prop({
-    type: () => String, 
+    type: () => String,
     enum: Object.values(HousingType),
     required: true,
   })
-  housingType!: OfferValueType;
+    housingType!: OfferValueType;
 
   @prop({
     required: true,
   })
-  rootsCount!: number;
+    rootsCount!: number;
 
   @prop({
     required: true,
   })
-  guestsCount!: number;
+    guestsCount!: number;
 
   @prop({
     required: true,
     default: '',
   })
-  price!: number;
+    price!: number;
 
   @prop({
     type: () => String,
     required: true,
     default: '',
   })
-  facilities!: string[];
+    facilities!: string[];
 
   @prop({
     required: true,
     default: '',
   })
-  commentsCount!: number;
+    commentsCount!: number;
 
   @prop({
     type: () => String,
     required: true,
     default: '',
   })
-  coordinates!: string[];
+    coordinates!: string[];
 
   @prop({
     ref: UserEntity,
     required: true,
   })
-  userId!: Ref<UserEntity>;
+    userId!: Ref<UserEntity>;
 
 }
 

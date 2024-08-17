@@ -14,7 +14,7 @@ export class DefaultUserService implements UserService {
   ) { }
 
   public create = async (dto: CreateUserDTO, salt: string): Promise<DocumentType<UserEntity>> => {
-    const user = new UserEntity(dto)
+    const user = new UserEntity(dto);
 
     user.setPassword(dto.password, salt);
 
@@ -22,15 +22,11 @@ export class DefaultUserService implements UserService {
     this.logger.info(`New user created: ${user.email}`);
 
     return result;
-  }
+  };
 
-  public findByEmail = async (email: string): Promise<DocumentType<UserEntity> | null> => {
-    return this.userModel.findOne({ email });
-  }
+  public findByEmail = async (email: string): Promise<DocumentType<UserEntity> | null> => this.userModel.findOne({ email });
 
-  public findById = async (id: string): Promise<DocumentType<UserEntity> | null> => {
-    return this.userModel.findById(id);
-  }
+  public findById = async (id: string): Promise<DocumentType<UserEntity> | null> => this.userModel.findById(id);
 
   public createOrFindByEmail = async (dto: CreateUserDTO, salt: string): Promise<DocumentType<UserEntity>> => {
     const findedUser = await this.userModel.findOne({ email: dto.email });
@@ -41,5 +37,5 @@ export class DefaultUserService implements UserService {
     }
 
     return await this.create(dto, salt);
-  }
+  };
 }

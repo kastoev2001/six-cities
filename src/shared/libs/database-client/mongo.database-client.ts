@@ -1,6 +1,6 @@
 import * as Mongoose from 'mongoose';
 import { inject, injectable } from 'inversify';
-import { setTimeout } from 'node:timers/promises'
+import { setTimeout } from 'node:timers/promises';
 
 import { DatabaseClient } from './database-client.interface.js';
 import { Component } from '../../types/component.enum.js';
@@ -25,14 +25,14 @@ export class MongoseDatabaseClient implements DatabaseClient {
       throw new Error('MongoDB client already connected');
     }
 
-    this.logger.info('Trying to connect to monogDB...')
-    
-    let attempt = 0
+    this.logger.info('Trying to connect to monogDB...');
+
+    let attempt = 0;
     while (attempt < RETRY_COUNT) {
       try {
         this.mongoose = await Mongoose.connect(uri);
         this.isConnected = true;
-        this.logger.info('Database connected established.')
+        this.logger.info('Database connected established.');
         return;
       } catch (err) {
         attempt++;
@@ -42,12 +42,10 @@ export class MongoseDatabaseClient implements DatabaseClient {
 
     }
 
-    throw new Error(`Unable to establish to connection after ${RETRY_COUNT}`)
-  }
-         
-  public isConnectedToDatabase = (): boolean => {
-    return this.isConnected;
-  }
+    throw new Error(`Unable to establish to connection after ${RETRY_COUNT}`);
+  };
+
+  public isConnectedToDatabase = (): boolean => this.isConnected;
 
   public async disconnect(): Promise<void> {
     if (!this.isConnectedToDatabase()) {

@@ -13,7 +13,7 @@ export interface UserEntity extends defaultClasses.Base {}
   }
 })
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
-export class UserEntity extends defaultClasses.TimeStamps implements User  {
+export class UserEntity extends defaultClasses.TimeStamps implements User {
   constructor(userData: User) {
     super();
     this.email = userData.email;
@@ -21,6 +21,7 @@ export class UserEntity extends defaultClasses.TimeStamps implements User  {
     this.avatar = userData.avatar;
     this.type = userData.type;
   }
+
   @prop({
     require: true,
     default: '',
@@ -32,7 +33,7 @@ export class UserEntity extends defaultClasses.TimeStamps implements User  {
     uniquie: true,
   })
   public email: string;
-  
+
   @prop({
     required: true,
     default: '',
@@ -40,7 +41,7 @@ export class UserEntity extends defaultClasses.TimeStamps implements User  {
   public avatar: string;
 
   @prop({
-    type: () =>  String,
+    type: () => String,
     enum: Object.values(UserType)
 
   })
@@ -52,13 +53,11 @@ export class UserEntity extends defaultClasses.TimeStamps implements User  {
   })
   private password?: string;
 
-  public getPassword = () => {
-    return this.password;
-  }
+  public getPassword = () => this.password;
 
   public setPassword = (password: string, salt: string): void => {
     this.password = createHMAC256(password, salt);
-  }
+  };
 }
 
 export const UserModel = getModelForClass(UserEntity);
