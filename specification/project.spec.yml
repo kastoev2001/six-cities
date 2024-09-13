@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.0.0
 info:
   title: API Сервер для демо-проекта "Шесть городов".
   description: |-
@@ -9,7 +9,94 @@ info:
   version: 2.0.0
 
 tags:
-  - name: offer
+  - name: offers
     description: Действие с объявлениями.
-  - name: user
+  - name: users
     description: Действие с пользователями.
+
+paths:
+  /user/register:
+    post:
+      tags:
+        - users
+      summary: Регистрация пользователя
+      description: Регистрация нового пользователя.
+
+      requestBody:
+        description: Информация для создания нового пользователя.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createUser"
+        required: true
+
+      responses:
+        "201":
+          description: Пользователь зарегистрироват. Объект пользователя.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+        "409":
+          description: Пользователь таким email уже существует.
+
+  /user/login:
+    post:
+      tags:
+        - users
+      summary: Авторизация пользователя
+      description: Авторизует пользователя на основе логина и пароля.
+
+    get:
+      tags:
+        - users
+      summary: Проверка состояния пользователя
+      description: Возвращает информацию по авторизованному пользователю.
+
+  /users/{avatarId}/avatar:
+    post:
+      tags:
+        - users
+      summary: Загружает изображение аватара
+      description:
+        Загружает изображение аватара пользователя. Изображение аватара должно быть в формате `png`
+        или `jpg`
+
+components:
+  schemas:
+    createUser:
+      type: object
+
+      properties:
+        email:
+          type: string
+          example: kastoev@gmail.com
+        username:
+          type: string
+          example: Azamat
+        avatar:
+          type: string
+          example: /image.jpg
+        type:
+          type: string
+          example: обычный
+        password:
+          type: string
+          example: "1234234"
+
+    user:
+      type: object
+
+      properties:
+        email:
+          type: string
+          example: kastoev@gmail.com
+        username:
+          type: string
+          example: Azamat
+        avatar:
+          type: string
+          example: /image.jpg
+        type:
+          type: string
+          example: обычный
