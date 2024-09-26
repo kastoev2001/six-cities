@@ -6,6 +6,9 @@ import { OfferEntity } from './offer.entity.js';
 import { CreateOfferDTO } from './dto/create-offer.dto.js';
 import { ModelType } from '@typegoose/typegoose/lib/types.js';
 import { Logger } from '../../libs/logger/index.js';
+import { MAX_OFFER_COUNT } from './offer.constants.js';
+import { SortType } from '../../types/sort-type.enum.js';
+import { UpdateOfferDto } from './dto/update-offer.dto.js';
 
 injectable();
 export class DefaultOfferService implements OfferService {
@@ -30,4 +33,33 @@ export class DefaultOfferService implements OfferService {
 
     return existedOffer;
   };
+
+  public deleteById = async (id: string): Promise<DocumentType<OfferEntity> | null> => {
+    return this.offerModule.findByIdAndDelete(id).exec();
+  }
+
+  public find = async (count: number): Promise<DocumentType<OfferEntity>[]> => {
+    const limit = count ?? MAX_OFFER_COUNT;
+    
+    return this.offerModule
+      .find()
+      .sort({createAt: SortType.Down})
+      .limit(limit)
+      .populate(['userId'])
+      .exec();
+  }
+
+  incCommentCount(offerId: string): Promise<DocumentType<OfferEntity> | null> {
+    return this.offerModule
+      .findByIdAndUpdate(offerId, {$inc: {
+        commentCount: 1
+      }})
+      .exec();
+  }
+  updateById(id: string, dto: UpdateOfferDto): Promise<DocumentType<OfferEntity> | null> {
+    return this.offerModule
+      .findByIdAndUpdate(id, dto, {new: true})
+      .populate(['userId'])
+      .exec();
+  }
 }
