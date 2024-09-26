@@ -1,4 +1,5 @@
-import { defaultClasses, prop, modelOptions, getModelForClass } from '@typegoose/typegoose';
+import { defaultClasses, prop, modelOptions, getModelForClass, Ref } from '@typegoose/typegoose';
+import { OfferEntity } from '../offer/offer.entity.js';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export interface CommentEntity extends defaultClasses.Base {}
@@ -22,7 +23,13 @@ export class CommentEntity extends defaultClasses.TimeStamps {
     default: 0,
     required: true,
   })
-  rating!: number
+  rating!: number;
+
+  @prop({
+    ref: OfferEntity,
+    required: true,
+  })
+  offerId!: Ref<OfferEntity>;
 }
 
 export const CommentModel = getModelForClass(CommentEntity);
