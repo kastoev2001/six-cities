@@ -13,7 +13,6 @@ export type Offer = {
   offerImages: OfferImages;
   isPremium: boolean;
   isFavorite: boolean;
-  rating: number;
   housingType: OfferValueType;
   rootsCount: number;
   guestsCount: number;
