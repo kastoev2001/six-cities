@@ -98,9 +98,9 @@ export class OfferEntity extends defaultClasses.TimeStamps {
 
   @prop({
     required: true,
-    default: '',
+    default: 0,
   })
-    commentsCount!: number;
+    commentCount!: number;
 
   @prop({
     type: () => String,
