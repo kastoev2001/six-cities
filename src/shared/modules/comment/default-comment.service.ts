@@ -24,6 +24,8 @@ export class DefaultCommentService implements CommentService {
   public find = async (count: number): Promise<DocumentType<CommentEntity>[]> => {
     const limit = count ?? MAX_COMMENT_COUNT;
     return this.commentModel
-      .find();
-  }
+      .find()
+      .limit(limit)
+      .exec();
+  };
 }
