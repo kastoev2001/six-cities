@@ -1,4 +1,4 @@
 export class CreateCommentDto {
-  description!: string;
+  text!: string;
   rating!: number;
 }
