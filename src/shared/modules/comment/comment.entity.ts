@@ -3,7 +3,7 @@ import { OfferEntity } from '../offer/offer.entity.js';
 import { UserEntity } from '../user/user.entity.js';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
-export interface CommentEntity extends defaultClasses.Base {}
+export interface CommentEntity extends defaultClasses.Base { }
 
 @modelOptions({
   schemaOptions: {
@@ -18,25 +18,25 @@ export class CommentEntity extends defaultClasses.TimeStamps {
     default: '',
     required: true,
   })
-  text!: string;
+    text!: string;
 
   @prop({
     default: 0,
     required: true,
   })
-  rating!: number;
+    rating!: number;
 
   @prop({
     ref: OfferEntity,
     required: true,
   })
-  offerId!: Ref<OfferEntity>;
+    offerId!: Ref<OfferEntity>;
 
   @prop({
     ref: UserEntity,
     required: true,
   })
-  userId! : Ref<UserEntity>;
+    userId!: Ref<UserEntity>;
 }
 
 export const CommentModel = getModelForClass(CommentEntity);

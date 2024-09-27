@@ -34,9 +34,8 @@ export class DefaultOfferService implements OfferService {
     return existedOffer;
   };
 
-  public deleteById = async (id: string): Promise<DocumentType<OfferEntity> | null> => {
-    return this.offerModule.findByIdAndDelete(id).exec();
-  }
+  public deleteById = async (id: string): Promise<DocumentType<OfferEntity> | null> => this.offerModule
+    .findByIdAndDelete(id).exec();
 
   public find = async (count: number): Promise<DocumentType<OfferEntity>[]> => {
     const limit = count ?? MAX_OFFER_COUNT;
@@ -57,8 +56,8 @@ export class DefaultOfferService implements OfferService {
         {
           $lookup: {
             from: 'comments',
-            localField: '_id',        
-            foreignField: 'offerId',  
+            localField: '_id',
+            foreignField: 'offerId',
             as: 'comments',
           }
         },
@@ -72,22 +71,19 @@ export class DefaultOfferService implements OfferService {
             comments: 0
           }
         }
-      ])
-  }
+      ]);
+  };
 
-  incCommentCount(offerId: string): Promise<DocumentType<OfferEntity> | null> {
-    return this.offerModule
-      .findByIdAndUpdate(offerId, {
-        $inc: {
-          commentCount: 1
-        }
-      })
-      .exec();
-  }
-  updateById(id: string, dto: UpdateOfferDto): Promise<DocumentType<OfferEntity> | null> {
-    return this.offerModule
-      .findByIdAndUpdate(id, dto, { new: true })
-      .populate(['userId'])
-      .exec();
-  }
+  public incCommentCount = (offerId: string): Promise<DocumentType<OfferEntity> | null> => this.offerModule
+    .findByIdAndUpdate(offerId, {
+      $inc: {
+        commentCount: 1
+      }
+    })
+    .exec();
+
+  public updateById = (id: string, dto: UpdateOfferDto): Promise<DocumentType<OfferEntity> | null> => this.offerModule
+    .findByIdAndUpdate(id, dto, { new: true })
+    .populate(['userId'])
+    .exec();
 }

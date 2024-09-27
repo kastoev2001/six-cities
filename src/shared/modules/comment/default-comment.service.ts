@@ -14,12 +14,12 @@ export class DefaultCommentService implements CommentService {
     @inject(Component.CommentModel) private readonly commentModel: types.ModelType<CommentEntity>,
     @inject(Component.Logger) private readonly logger: Logger
   ) {}
-  
+
   public create = async (dto: CreateCommentDto): Promise<DocumentType<CommentEntity>> => {
     const result = await this.commentModel.create(dto);
     this.logger.info('Create comment.');
     return result;
-  }
+  };
 
   public find = async (count: number): Promise<DocumentType<CommentEntity>[]> => {
     const limit = count ?? MAX_COMMENT_COUNT;
