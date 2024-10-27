@@ -44,7 +44,7 @@ export class RestApplication {
   }
 
   private _initControllers = () => {
-    this.server.use('/categories', this.commentController.)
+    this.server.use('/categories', this.commentController.router)
   }
 
   public init = async (): Promise<void> => {
@@ -58,5 +58,9 @@ export class RestApplication {
     this.logger.info('Try to init Server...');
     this._initServer();
     this.logger.info(`Server started on http://localhost:${this.config.get('PORT')}`);
+
+    this.logger.info('Try to init Controllers...');
+    this._initControllers();
+    this.logger.info('Controller initialization completed.');
   };
 }
