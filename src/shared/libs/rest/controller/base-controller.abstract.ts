@@ -8,7 +8,7 @@ import { Route } from '../types/route.interface.js';
 
 @injectable()
 export abstract class BaseContrller implements Controller {
-  protected readonly _rotuter: Router;
+  private readonly _rotuter: Router;
 
   constructor(
     protected readonly logger: Logger,
