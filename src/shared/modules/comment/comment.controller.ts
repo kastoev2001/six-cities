@@ -4,7 +4,7 @@ import { Component } from '../../types/component.enum.js';
 import { HttpMethod } from '../../libs/rest/index.js';
 
 import { BaseContrller } from '../../libs/rest/controller/base-controller.abstract.js';
-import { Logger } from 'pino';
+import { Logger } from '../../libs/logger/index.js';
 
 @injectable()
 export class CommentController extends BaseContrller {
