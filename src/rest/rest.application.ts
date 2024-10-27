@@ -8,6 +8,7 @@ import { RestConfig } from '../shared/config/rest.config.js';
 import { DatabaseClient } from '../shared/libs/database-client/index.js';
 
 import { getMongoURI } from '../shared/helpers/index.js';
+import { Controller } from '../shared/libs/rest/index.js';
 
 const app = express();
 
@@ -18,7 +19,8 @@ export class RestApplication {
   constructor(
     @inject(Component.Logger) private readonly logger: Logger,
     @inject(Component.RestConfig) private readonly config: RestConfig,
-    @inject(Component.DatabaseClient) private readonly databaseClient: DatabaseClient
+    @inject(Component.DatabaseClient) private readonly databaseClient: DatabaseClient,
+    @inject(Component.CommentController) private readonly commentController: Controller,
   ) {
     this.server = express();
   }
@@ -39,6 +41,10 @@ export class RestApplication {
     const port = this.config.get('PORT');
 
     app.listen(port);
+  }
+
+  private _initControllers = () => {
+    this.server.use('/categories', this.commentController.)
   }
 
   public init = async (): Promise<void> => {
