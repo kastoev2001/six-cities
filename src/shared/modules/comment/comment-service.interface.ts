@@ -4,5 +4,5 @@ import { CommentEntity } from './comment.entity.js';
 
 export interface CommentService {
   create(dto: CreateCommentDto): Promise<DocumentType<CommentEntity>>;
-  find(count: number): Promise<DocumentType<CommentEntity>[]>;
+  find(count?: number): Promise<DocumentType<CommentEntity>[]>;
 }
