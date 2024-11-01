@@ -10,8 +10,6 @@ import { DatabaseClient } from '../shared/libs/database-client/index.js';
 import { getMongoURI } from '../shared/helpers/index.js';
 import { Controller } from '../shared/libs/rest/index.js';
 
-const app = express();
-
 @injectable()
 export class RestApplication {
   private readonly server: Express;
@@ -40,11 +38,11 @@ export class RestApplication {
   private _initServer = () => {
     const port = this.config.get('PORT');
 
-    app.listen(port);
+    this.server.listen(port);
   }
 
   private _initControllers = () => {
-    this.server.use('/categories', this.commentController.router)
+    this.server.use('/comments', this.commentController.router);
   }
 
   public init = async (): Promise<void> => {
@@ -55,12 +53,12 @@ export class RestApplication {
     await this._initDB();
     this.logger.info('init Database completed.');
 
-    this.logger.info('Try to init Server...');
-    this._initServer();
-    this.logger.info(`Server started on http://localhost:${this.config.get('PORT')}`);
-
     this.logger.info('Try to init Controllers...');
     this._initControllers();
     this.logger.info('Controller initialization completed.');
+
+    this.logger.info('Try to init Server...');
+    this._initServer();
+    this.logger.info(`Server started on http://localhost:${this.config.get('PORT')}`);
   };
 }

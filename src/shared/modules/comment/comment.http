@@ -1,0 +1,9 @@
+# Комментарии
+
+### Получить список комментарий
+
+GET http://localhost:3000/comments HTTP/1.1
+Content-Type: application/json
+
+
+### 

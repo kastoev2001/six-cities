@@ -50,7 +50,6 @@ export class ImportCommand implements ICommand {
       postDate: offer.postDate,
       previewImage: offer.previewImage,
       price: offer.price,
-      rating: offer.rating,
       rootsCount: offer.rootsCount,
       title: offer.title,
       userId: user.id,

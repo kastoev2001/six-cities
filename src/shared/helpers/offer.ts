@@ -21,7 +21,6 @@ export const createOffer = (offerData: string): Offer => {
       .map((image) => image),
     isPremium: 'yes' === isPremium,
     isFavorite: 'yes' === isFavorite,
-    rating: parseInt(rating, 10),
     housingType: housingType as typeof HousingType[keyof typeof HousingType],
     rootsCount: parseInt(rootsCount, 10),
     guestsCount: parseInt(guestsCount, 10),
