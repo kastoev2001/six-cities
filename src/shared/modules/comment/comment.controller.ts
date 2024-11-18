@@ -1,10 +1,14 @@
 import { inject, injectable } from 'inversify';
+import { Request, Response } from 'express';
 
 import { Component } from '../../types/component.enum.js';
+
 import { HttpMethod, BaseController } from '../../libs/rest/index.js';
 import { CommentService } from './comment-service.interface.js';
 import { Logger } from '../../libs/logger/index.js';
-import { Request, Response } from 'express';
+import { CommentRdo } from './rdo/comment.rdo.js';
+
+import { fillDTO } from '../../helpers/common.js';
 
 @injectable()
 export class CommentController extends BaseController {
@@ -21,10 +25,10 @@ export class CommentController extends BaseController {
   }
 
   public index = async (_req: Request, res: Response): Promise<void> => {
-    this.logger.info('Geting comments...');
     const comments = await this.commentService.find();
-    this.logger.info('Geted comments!');
-    this.ok(res, comments);
+    const responseData = fillDTO(CommentRdo, comments);
+    this.ok(res, responseData);
+    this.logger.info('Object comment created.')
   }
 
   public create = (_req: Request, _res: Response) => {
