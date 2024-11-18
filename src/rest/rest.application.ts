@@ -45,6 +45,10 @@ export class RestApplication {
     this.server.use('/comments', this.commentController.router);
   }
 
+  private _initMiddleware = () => {
+    this.server.use(express.json());
+  }
+
   public init = async (): Promise<void> => {
     this.logger.info('Application initialization.');
     this.logger.info(`Get value from env $PORT: ${this.config.get('PORT')}`);
@@ -56,6 +60,10 @@ export class RestApplication {
     this.logger.info('Try to init Controllers...');
     this._initControllers();
     this.logger.info('Controller initialization completed.');
+
+    this.logger.info('Init app-level middleware.');
+    this._initMiddleware();
+    this.logger.info('App-level middleware initialization completed');
 
     this.logger.info('Try to init Server...');
     this._initServer();
