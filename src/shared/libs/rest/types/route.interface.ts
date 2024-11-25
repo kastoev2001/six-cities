@@ -4,5 +4,5 @@ import { Response, Request, NextFunction } from 'express';
 export interface Route {
   path: string;
   method: HttpMethod
-  handler: (req: Request, res: Response, next: NextFunction) => void;
+  handler: (req: Request, res: Response, next: NextFunction) => Promise<void>;
 }
