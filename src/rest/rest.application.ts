@@ -6,6 +6,7 @@ import { Component } from '../shared/types/index.js';
 import { Logger } from '../shared/libs/logger/logger.interface.js';
 import { RestConfig } from '../shared/config/rest.config.js';
 import { DatabaseClient } from '../shared/libs/database-client/index.js';
+import { ExceptionFilter } from '../shared/libs/rest/index.js';
 
 import { getMongoURI } from '../shared/helpers/index.js';
 import { Controller } from '../shared/libs/rest/index.js';
@@ -19,6 +20,7 @@ export class RestApplication {
     @inject(Component.RestConfig) private readonly config: RestConfig,
     @inject(Component.DatabaseClient) private readonly databaseClient: DatabaseClient,
     @inject(Component.CommentController) private readonly commentController: Controller,
+    @inject(Component.ExceptionFilter) private readonly appEceptionFilter: ExceptionFilter,
   ) {
     this.server = express();
   }
@@ -49,6 +51,10 @@ export class RestApplication {
     this.server.use(express.json());
   }
 
+  private _initEceptionFilters = () => {
+    this.server.use(this.appEceptionFilter.catch);
+  }
+
   public init = async (): Promise<void> => {
     this.logger.info('Application initialization.');
     this.logger.info(`Get value from env $PORT: ${this.config.get('PORT')}`);
@@ -60,6 +66,10 @@ export class RestApplication {
     this.logger.info('Try to init Controllers...');
     this._initControllers();
     this.logger.info('Controller initialization completed.');
+
+    this.logger.info('Init exception filter.');
+    this._initEceptionFilters();
+    this.logger.info('Exception filters initialization compleated');
 
     this.logger.info('Init app-level middleware.');
     this._initMiddleware();
