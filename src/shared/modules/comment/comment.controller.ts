@@ -37,10 +37,10 @@ export class CommentController extends BaseController {
     { body }: Request<Record<string, unknown>, Record<string, unknown>, CreateCommentDto>,
     res: Response
   ) => {
-    const existComment = await this.commentService.findByName(body.name);
+    const existComment = await this.commentService.findByName('asdf');
 
     if (existComment) {
-      const existCoomentError = new Error(`Comment with name ${body.name} exists.`)
+      const existCoomentError = new Error(`Comment with name ${body} exists.`)
       this.send(
         res,
         StatusCodes.UNPROCESSABLE_ENTITY,
