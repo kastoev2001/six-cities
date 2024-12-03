@@ -16,15 +16,24 @@ export class AppExceptionFilter implements ExceptionFilter {
     this.logger.info('Register AppExceptionFilter.');
   }
 
-  private handlerHttpError = (Status) => {
+  private handlerHttpError = (error: HttpError, _req: Request, res: Response, _next: NextFunction) => {
+    this.logger.error(`[${error.detail}]: ${error.httpStatusCode} - ${error.message}`, error);
 
+    res
+      .status(error.httpStatusCode)
+      .send(createObjectError(error.message));
   }
-  private handlerOtherError = () => {}
-
-  public catch = (error: Error, _req: Request, res: Response, _next: NextFunction): void => {
+  private handlerOtherError = (error: Error, _req: Request, res: Response, _next: NextFunction) => {
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({error: error.message});
+      .json(createObjectError(error.message));
   }
 
+  public catch = (error: Error | HttpError, req: Request, res: Response, next: NextFunction): void => {
+    if (error instanceof HttpError) {
+      return this.handlerHttpError(error, req, res, next);
+    }
+
+    this.handlerOtherError(error, req, res, next);
+  }
 }
