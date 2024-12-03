@@ -3,16 +3,22 @@ import { BaseController } from '../../libs/rest/index.js';
 import { Component } from '../../types/component.enum.js';
 import { Logger } from '../../libs/logger/index.js';
 import { HttpMethod } from '../../libs/rest/index.js';
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { UserService } from './user-service.interface.js';
 import { CreateUserDto } from './dto/create-user.dto.js'
 import { StatusCodes } from 'http-status-codes';
+import { CreateUserRequest } from './type/create-user-request.type.js';
+import { HttpError } from '../../libs/rest/errors/http-error.js';
+import { Config, RestSchema } from '../../config/index.js';
+import { fillDTO } from '../../helpers/common.js';
+import { UserRdo } from './rdo/user.rdo.js';
 
 @injectable()
 export class UserController extends BaseController {
   constructor(
     @inject(Component.Logger) protected readonly logger: Logger,
     @inject(Component.UserService) private readonly userSerivce: UserService,
+    @inject(Component.RestConfig) private readonly config: Config<RestSchema>,
   ) {
     super(logger);
 
@@ -22,20 +28,21 @@ export class UserController extends BaseController {
   }
 
   private create = async (
-    _req: Request<Record<string, unknown>, Record<string, unknown>, CreateUserDto>,
-    _res: Response) => {
-    // const isExistUser = !!this.userSerivce.findByEmail(body.email);
+    { body }: CreateUserRequest,
+    res: Response): Promise<void> => {
+      const isExistUser = !!await this.userSerivce.findByEmail(body.email);
 
-    // if (isExistUser) {
-    //   const existUserError = new Error(`User with email ${body.email} exists.`);
-    //   this.send(
-    //     res,
-    //     StatusCodes.UNPROCESSABLE_ENTITY,
-    //     {error: existUserError.message}
-    //   )
-    // }
+      if (isExistUser) {
+        throw new HttpError(
+          StatusCodes.CONFLICT,
+          `User with email "${body.email}" exist.`,
+          `UserController`,
+        );
+      }
 
-    throw new Error('[UserController] Oops');
+      const result = await this.userSerivce.create(body, this.config.get('SALT'));
+
+      this.created(res, fillDTO(UserRdo,result));
   }
 
 }
