@@ -8,9 +8,9 @@ import { CommentService } from './comment-service.interface.js';
 import { Logger } from '../../libs/logger/index.js';
 import { CommentRdo } from './rdo/comment.rdo.js';
 import { StatusCodes } from 'http-status-codes';
+import { CreateCommentRequest } from './type/create-comment-request.js';
 
 import { fillDTO } from '../../helpers/common.js';
-import { CreateCommentDto } from './dto/create-comment.dto.js';
 
 @injectable()
 export class CommentController extends BaseController {
@@ -34,21 +34,10 @@ export class CommentController extends BaseController {
   }
 
   public create = async (
-    { body }: Request<Record<string, unknown>, Record<string, unknown>, CreateCommentDto>,
+    { body }: CreateCommentRequest,
     res: Response
   ) => {
-    const existComment = await this.commentService.findByName('asdf');
-
-    if (existComment) {
-      const existCoomentError = new Error(`Comment with name ${body} exists.`)
-      this.send(
-        res,
-        StatusCodes.UNPROCESSABLE_ENTITY,
-        { error: existCoomentError.message }
-      );
-
-      return this.logger.error(existCoomentError.message, existCoomentError);
-    }
-    
+    const result = await this.commentService.create(body);
+    this.created(res, fillDTO(CommentRdo, result));
   }
 }
