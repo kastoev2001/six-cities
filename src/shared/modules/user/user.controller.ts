@@ -13,6 +13,7 @@ import { Config, RestSchema } from '../../config/index.js';
 import { fillDTO } from '../../helpers/common.js';
 import { UserRdo } from './rdo/user.rdo.js';
 import { LoginUserRequest } from './type/login-user-request.type.js';
+import { Request } from 'got';
 
 @injectable()
 export class UserController extends BaseController {
@@ -71,4 +72,19 @@ export class UserController extends BaseController {
     )
   }
 
+  private logout = async (_req: Request, _res: Response, _next: NextFunction) => {
+    throw new HttpError(
+      StatusCodes.NOT_IMPLEMENTED,
+      `Not implemented`,
+      `UserController`,
+    );
+  }
+
+  private isLogged = async (_req: Request, _res: Response, _next: NextFunction) => {
+    throw new HttpError(
+      StatusCodes.NOT_IMPLEMENTED,
+      `Not implemented`,
+      `UserController`,
+    );
+  }
 }
