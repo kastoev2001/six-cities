@@ -13,3 +13,13 @@ Content-type: application/json
 }
 
 ###
+
+POST http://localhost:3000/user/login HTTP/1.1
+Content-type: application/json
+
+{
+  "email": "kastoev2001@gmail.com",
+  "password": "sdfasdflkj234"
+}
+
+###

@@ -12,7 +12,7 @@ export class UserRdo {
   public avatar!: string;
 
   @Expose()
-  public type!: UserValueType;
+public type!: UserValueType; 
 
   @Expose()
   public password!: string;
