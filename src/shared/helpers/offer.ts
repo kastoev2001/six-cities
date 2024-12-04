@@ -6,7 +6,7 @@ export const createOffer = (offerData: string): Offer => {
   const [
     title, description, createdDate, city,
     previewImage, offerImages, isPremium, isFavorite,
-    rating, housingType, rootsCount, guestsCount, price,
+    housingType, rootsCount, guestsCount, price,
     facilities, commentsCount, coordinates, username, avatar,
     email, type
   ] = offerData.replace('\n', '').split('\t');

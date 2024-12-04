@@ -5,7 +5,6 @@ import { Logger } from '../../libs/logger/index.js';
 import { HttpMethod } from '../../libs/rest/index.js';
 import { NextFunction, Response } from 'express';
 import { UserService } from './user-service.interface.js';
-import { CreateUserDto } from './dto/create-user.dto.js'
 import { StatusCodes } from 'http-status-codes';
 import { CreateUserRequest } from './type/create-user-request.type.js';
 import { HttpError } from '../../libs/rest/errors/http-error.js';
@@ -26,8 +25,8 @@ export class UserController extends BaseController {
 
     this.logger.info('Register route for UserController...');
 
-    this.addRoute({ path: '/register', method: HttpMethod.Post, handler: this.create })
-    this.addRoute({ path: '/login', method: HttpMethod.Post, handler: this.login })
+    this.addRoute({ path: '/register', method: HttpMethod.Post, handler: this.create });
+    this.addRoute({ path: '/login', method: HttpMethod.Post, handler: this.login });
   }
 
   private create = async (
@@ -41,14 +40,14 @@ export class UserController extends BaseController {
       throw new HttpError(
         StatusCodes.CONFLICT,
         `User with email "${body.email}" exist.`,
-        `UserController`,
+        'UserController',
       );
     }
 
     const result = await this.userSerivce.create(body, this.config.get('SALT'));
 
     this.created(res, fillDTO(UserRdo, result));
-  }
+  };
 
   private login = async (
     { body }: LoginUserRequest,
@@ -62,29 +61,29 @@ export class UserController extends BaseController {
         StatusCodes.CONFLICT,
         `User with email "${body.email} not found."`,
         'UserController'
-      )
+      );
     }
 
     throw new HttpError(
       StatusCodes.NOT_IMPLEMENTED,
-      `Not implemented`,
+      'Not implemented',
       'UserController',
-    )
-  }
+    );
+  };
 
   private logout = async (_req: Request, _res: Response, _next: NextFunction) => {
     throw new HttpError(
       StatusCodes.NOT_IMPLEMENTED,
-      `Not implemented`,
-      `UserController`,
+      'Not implemented',
+      'UserController',
     );
-  }
+  };
 
   private isLogged = async (_req: Request, _res: Response, _next: NextFunction) => {
     throw new HttpError(
       StatusCodes.NOT_IMPLEMENTED,
-      `Not implemented`,
-      `UserController`,
+      'Not implemented',
+      'UserController',
     );
-  }
+  };
 }

@@ -7,7 +7,6 @@ import { HttpMethod, BaseController } from '../../libs/rest/index.js';
 import { CommentService } from './comment-service.interface.js';
 import { Logger } from '../../libs/logger/index.js';
 import { CommentRdo } from './rdo/comment.rdo.js';
-import { StatusCodes } from 'http-status-codes';
 import { CreateCommentRequest } from './type/create-comment-request.js';
 
 import { fillDTO } from '../../helpers/common.js';
@@ -30,8 +29,8 @@ export class CommentController extends BaseController {
     const comments = await this.commentService.find();
     const responseData = fillDTO(CommentRdo, comments);
     this.ok(res, responseData);
-    this.logger.info('Object comment created.')
-  }
+    this.logger.info('Object comment created.');
+  };
 
   public create = async (
     { body }: CreateCommentRequest,
@@ -39,5 +38,5 @@ export class CommentController extends BaseController {
   ) => {
     const result = await this.commentService.create(body);
     this.created(res, fillDTO(CommentRdo, result));
-  }
+  };
 }

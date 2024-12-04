@@ -19,8 +19,6 @@ export const getRandomBoolean = () => Math.random() >= 0.5;
 export const fillDTO = <T, V>(someDto: ClassConstructor<T>, plainObject: V) =>
   plainToInstance(someDto, plainObject, { excludeExtraneousValues: true });
 
-export const createObjectError = (message: string) => {
-  return {
-    error: message,
-  };
-};
+export const createObjectError = (message: string) => ({
+  error: message,
+});

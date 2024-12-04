@@ -16,7 +16,7 @@ export class OfferController extends BaseController {
   ) {
     super(logger);
 
-    this.logger.info('Register route for OfferController...')
+    this.logger.info('Register route for OfferController...');
 
     this.addRoute({ path: 'offers', method: HttpMethod.Get, handler: this.list });
     this.addRoute({ path: 'offers', method: HttpMethod.Post, handler: this.create });
@@ -35,7 +35,7 @@ export class OfferController extends BaseController {
     const result = await this.offerService.create(body);
 
     this.created(res, result);
-  }
+  };
 
   private update = async (
     {
@@ -52,20 +52,20 @@ export class OfferController extends BaseController {
       throw new HttpError(
         StatusCodes.CONFLICT,
         `Offer with id ${offerId} not found.`,
-        `OfferController`,
+        'OfferController',
       );
     }
 
     const result = await this.offerService.updateById(offerId, body);
 
     this.ok(res, result);
-  }
+  };
 
   private delete = async ({
     params
   }: UpdateOfferRequest,
-    res: Response,
-    _next: NextFunction,
+  res: Response,
+  _next: NextFunction,
   ) => {
     const offerId = String(params.id);
     const isExistOffer = !!await this.offerService.findById(offerId);
@@ -74,20 +74,20 @@ export class OfferController extends BaseController {
       throw new HttpError(
         StatusCodes.CONFLICT,
         `Offer with id ${offerId} not found.`,
-        `OfferController`,
+        'OfferController',
       );
     }
 
     const result = await this.offerService.deleteById(offerId);
 
     this.ok(res, result);
-  }
+  };
 
   private list = async (_req: Request, res: Response, _next: NextFunction) => {
     const offers = await this.offerService.find();
 
     this.ok(res, offers);
-  }
+  };
 
   private details = async (
     {
@@ -101,37 +101,37 @@ export class OfferController extends BaseController {
     const result = await this.offerService.findById(offerId);
 
     this.ok(res, result);
-  }
+  };
 
   private listPremium = async (_req: Request, _res: Response, _next: NextFunction) => {
     throw new HttpError(
       StatusCodes.NOT_IMPLEMENTED,
-      `Not implemented`,
-      `UserController`,
+      'Not implemented',
+      'UserController',
     );
-  }
+  };
 
   private listFavorite = async () => {
     throw new HttpError(
       StatusCodes.NOT_ACCEPTABLE,
-      `Not implemented`,
-      `UserController`,
+      'Not implemented',
+      'UserController',
     );
-  }
+  };
 
   private addFavorite = async () => {
     throw new HttpError(
       StatusCodes.NOT_IMPLEMENTED,
-      `Not implemented`,
-      `UserController`,
+      'Not implemented',
+      'UserController',
     );
-  }
+  };
 
   private removeFavorite = async () => {
     throw new HttpError(
       StatusCodes.NOT_IMPLEMENTED,
-      `Not implemented`,
-      `UserController`,
+      'Not implemented',
+      'UserController',
     );
-  }
+  };
 }

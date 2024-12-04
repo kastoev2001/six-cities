@@ -2,8 +2,8 @@ import { Expose } from 'class-transformer';
 
 export class CommentRdo {
   @Expose()
-  text!: string;
+    text!: string;
 
   @Expose()
-  rating!: number;
+    rating!: number;
 }

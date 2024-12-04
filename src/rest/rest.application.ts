@@ -42,20 +42,20 @@ export class RestApplication {
     const port = this.config.get('PORT');
 
     this.server.listen(port);
-  }
+  };
 
   private _initControllers = () => {
     this.server.use('/comments', this.commentController.router);
     this.server.use('/user', this.userController.router);
-  }
+  };
 
   private _initMiddleware = () => {
     this.server.use(express.json());
-  }
+  };
 
   private _initEceptionFilters = () => {
     this.server.use(this.appEceptionFilter.catch);
-  }
+  };
 
   public init = async (): Promise<void> => {
     this.logger.info('Application initialization.');

@@ -30,12 +30,12 @@ export class DefaultCommentService implements CommentService {
   };
 
   public findByName = async (commentName: string): Promise<DocumentType<CommentEntity> | null> => {
-    const existComment = await this.commentModel.findOne({name: commentName})
+    const existComment = await this.commentModel.findOne({name: commentName});
 
     if (existComment) {
       return null;
     }
 
     return existComment;
-  }
+  };
 }
