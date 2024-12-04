@@ -102,4 +102,36 @@ export class OfferController extends BaseController {
 
     this.ok(res, result);
   }
+
+  private listPremium = async (_req: Request, _res: Response, _next: NextFunction) => {
+    throw new HttpError(
+      StatusCodes.NOT_IMPLEMENTED,
+      `Not implemented`,
+      `UserController`,
+    );
+  }
+
+  private listFavorite = async () => {
+    throw new HttpError(
+      StatusCodes.NOT_ACCEPTABLE,
+      `Not implemented`,
+      `UserController`,
+    );
+  }
+
+  private addFavorite = async () => {
+    throw new HttpError(
+      StatusCodes.NOT_IMPLEMENTED,
+      `Not implemented`,
+      `UserController`,
+    );
+  }
+
+  private removeFavorite = async () => {
+    throw new HttpError(
+      StatusCodes.NOT_IMPLEMENTED,
+      `Not implemented`,
+      `UserController`,
+    );
+  }
 }
